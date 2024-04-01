@@ -26,6 +26,26 @@ function checkFadeIn() {
 }
 
   // Panggil fungsi saat halaman dimuat dan saat digulir
-    $(window).on('load scroll', checkFadeIn);
-
+$(window).on('load scroll', checkFadeIn);
 });  
+function SendMail() {
+    var params = {
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        subjek: document.getElementById("subjek").value,
+        pesan: document.getElementById("pesan").value
+    };
+    
+    emailjs.send("service_39ypiqi", "template_fl0vfit", params)
+        .then(function(response) {
+            console.log("Email terkirim:", response);
+            document.getElementById("modalMessage").innerText = "Pesan Anda telah berhasil dikirim!";
+            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+            myModal.show();
+        }, function(error) {
+            console.error("Error saat mengirim email:", error);
+            document.getElementById("modalMessage").innerText = "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.";
+            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+            myModal.show();
+        });
+}

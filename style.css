@@ -3,7 +3,6 @@
     position: fixed;
     top: 0;
     width: 100%;
-    /* min-height: 80px; */
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 html{
@@ -17,7 +16,7 @@ p, h1, h2, h3, h4, h5, form, iframe, a {
     transition: opacity 2s ease; /* Tambahkan efek transisi */
 }
 .navbar-brand img{
-    height: 50px; /* Menyesuaikan tinggi navbar */
+    height: 50px; /* Menyesuaikan tinggi logo pada navbar */
 }
 .nav-link {
     font-size: large;
@@ -59,12 +58,10 @@ p, h1, h2, h3, h4, h5, form, iframe, a {
 .carousel-caption h4 {
     font-size: 3rem;
     letter-spacing: 2px;
-    /* margin-top: 30px; */
 }
 .carousel-caption h5 {
     font-size: 4rem;
     letter-spacing: 2px;
-    /* margin-top: 30px; */
 }
 .carousel-caption p {
     width: 100%;
@@ -136,7 +133,7 @@ iframe{
     height: 100%;
     border: 0;
 }
-#message{
+#pesan{
     height: 120px;
 }
 .footer {
@@ -148,8 +145,6 @@ iframe{
     text-decoration: none;
     color: white;
 }
-
-
 .custom-icon{
     font-size: 80px;
     color: #009b4c;

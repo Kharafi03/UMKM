@@ -1,25 +1,25 @@
 $(document).ready(function(){
-    $(".card, .btn-square, .imgtentangkami").hover(function(){ // When mouse enters card
-      $(this).addClass("zoomed"); // Add 'zoomed' class to the card
-    }, function(){ // When mouse leaves card
-      $(this).removeClass("zoomed"); // Remove 'zoomed' class from the card
+    $(".card, .btn-square, .imgtentangkami").hover(function(){ // Ketika mouse diarahkan ke gambar dan card
+      $(this).addClass("zoomed"); // Tambahkan class zoomed
+    }, function(){ // Ketika mouse keluar dari gambar dan card
+      $(this).removeClass("zoomed"); // Hapus class zoomed
     });
 
     // Fungsi untuk memeriksa apakah elemen berada dalam viewport saat digulir
-function isElementInViewport(el) {
-    var rect = el.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+function isElementInViewport(el) { // Parameter merupakan elemen HTML yang ingin diperiksa apakah berada dalam viewport atau tidak.
+    var rect = el.getBoundingClientRect(); // mendapatkan koordinat relatif elemen terhadap viewport menggunakan metode getBoundingClientRect(). Metode ini mengembalikan objek DOMRect yang berisi informasi tentang ukuran dan posisi relatif dari elemen terhadap viewport.
+    return ( //  mengembalikan hasil dari pengecekan apakah elemen berada dalam viewport atau tidak.
+        rect.top >= 0 && // memastikan bahwa bagian atas elemen berada di atas atau setidaknya di bagian atas viewport.
+        rect.left >= 0 && // memastikan bahwa bagian kiri elemen berada di sebelah kiri atau setidaknya di bagian kiri viewport.
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && // memastikan bahwa bagian bawah elemen berada di bawah atau setidaknya di bagian bawah viewport.
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) // memastikan bahwa bagian kanan elemen berada di sebelah kanan atau setidaknya di bagian kanan viewport.
     );
 }
 
   // Fungsi untuk memeriksa setiap elemen <p> saat digulir
-function checkFadeIn() {
-    $('p, h1, h2, h3, h4, h5, form, iframe, a').each(function() {
-    if (isElementInViewport(this)) {
+function checkFadeIn() { // memeriksa apakah elemen-elemen tertentu telah masuk ke dalam viewport dan memberikan efek fadeIn kepada elemen-elemen tersebut.
+    $('p, h1, h2, h3, h4, h5, form, iframe, a').each(function() { // pilih elemen apa saja dan mengulangi setiap elemen yang dipilih
+    if (isElementInViewport(this)) { //memeriksa apakah elemen saat ini berada dalam viewport
         $(this).css('opacity', '1'); // Efek fadeIn saat elemen masuk dalam viewport
     }
     });
@@ -28,6 +28,8 @@ function checkFadeIn() {
   // Panggil fungsi saat halaman dimuat dan saat digulir
 $(window).on('load scroll', checkFadeIn);
 });  
+
+// API Email
 function SendMail() {
     var params = {
         username: document.getElementById("username").value,

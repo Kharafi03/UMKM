@@ -31,23 +31,36 @@ $(window).on('load scroll', checkFadeIn);
 
 // API Email
 function SendMail() {
-    var params = {
-        username: document.getElementById("username").value,
-        email: document.getElementById("email").value,
-        subjek: document.getElementById("subjek").value,
-        pesan: document.getElementById("pesan").value
-    };
-    
-    emailjs.send("service_39ypiqi", "template_fl0vfit", params)
-        .then(function(response) {
-            console.log("Email terkirim:", response);
-            document.getElementById("modalMessage").innerText = "Pesan Anda telah berhasil dikirim!";
-            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
-            myModal.show();
-        }, function(error) {
-            console.error("Error saat mengirim email:", error);
-            document.getElementById("modalMessage").innerText = "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.";
-            var myModal = new bootstrap.Modal(document.getElementById('myModal'));
-            myModal.show();
-        });
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var subjek = document.getElementById("subjek").value;
+    var pesan = document.getElementById("pesan").value;
+
+    // Validasi input
+    if (username && email && subjek && pesan) {
+        var params = {
+            username: username,
+            email: email,
+            subjek: subjek,
+            pesan: pesan
+        };
+
+        emailjs.send("service_39ypiqi", "template_fl0vfit", params)
+            .then(function(response) {
+                console.log("Email terkirim:", response);
+                document.getElementById("modalMessage").innerText = "Pesan Anda telah berhasil dikirim!";
+                var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+                myModal.show();
+            }, function(error) {
+                console.error("Error saat mengirim email:", error);
+                document.getElementById("modalMessage").innerText = "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.";
+                var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+                myModal.show();
+            });
+    } else {
+        // Jika ada input yang tidak diisi, tampilkan pesan kesalahan
+        document.getElementById("modalMessage").innerText = "Semua kolom harus diisi.";
+        var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+        myModal.show();
+    }
 }

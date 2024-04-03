@@ -27,20 +27,25 @@ function checkFadeIn() { // memeriksa apakah elemen-elemen tertentu telah masuk 
 
   // Panggil fungsi saat halaman dimuat dan saat digulir
 $(window).on('load scroll', checkFadeIn);
+
+
 });  
 
 // API Email
 function isValidEmail(email) {
+    //regular ekspresi untuk mengambil validasi email
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+//button kirim
 function SendMail() {
+    //deklarasi variable
     var username = document.getElementById("username").value;
     var email = document.getElementById("email").value;
     var subjek = document.getElementById("subjek").value;
     var pesan = document.getElementById("pesan").value;
 
-    // Validasi input
+    // kondisi validasi input
     if (username && email && subjek && pesan && isValidEmail(email)) {
         var params = {
             username: username,
@@ -48,31 +53,27 @@ function SendMail() {
             subjek: subjek,
             pesan: pesan
         };
-
         emailjs.send("service_39ypiqi", "template_fl0vfit", params)
             .then(function(response) {
                 console.log("Email terkirim:", response);
                 document.getElementById("modalMessage").innerText = "Pesan Anda telah berhasil dikirim!";
                 var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+                //tampilkan modal plugin
                 myModal.show();
                 // Setel nilai input menjadi string kosong
                 usernameInput.value = "";
                 emailInput.value = "";
                 subjekInput.value = "";
                 pesanInput.value = "";
-            }, function(error) {
-                console.error("Error saat mengirim email:", error);
-                document.getElementById("modalMessage").innerText = "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.";
-                var myModal = new bootstrap.Modal(document.getElementById('myModal'));
-                myModal.show();
             });
     } else {
-        // Jika ada input yang tidak diisi atau email tidak valid, tampilkan pesan kesalahan
+        // Jika ada input yang tidak diisi atau email tidak valid, tampilkan pesan kesalahan pada modalMessage
         if (!isValidEmail(email)) {
             document.getElementById("modalMessage").innerText = "Alamat email tidak valid. Silakan coba lagi.";
         } else {
             document.getElementById("modalMessage").innerText = "Semua kolom harus diisi.";
         }
+        //tampilkan modal plugin
         var myModal = new bootstrap.Modal(document.getElementById('myModal'));
         myModal.show();
     }

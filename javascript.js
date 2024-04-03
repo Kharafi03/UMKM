@@ -30,6 +30,10 @@ $(window).on('load scroll', checkFadeIn);
 });  
 
 // API Email
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
 function SendMail() {
     var username = document.getElementById("username").value;
     var email = document.getElementById("email").value;
@@ -37,7 +41,7 @@ function SendMail() {
     var pesan = document.getElementById("pesan").value;
 
     // Validasi input
-    if (username && email && subjek && pesan) {
+    if (username && email && subjek && pesan && isValidEmail(email)) {
         var params = {
             username: username,
             email: email,
@@ -51,6 +55,11 @@ function SendMail() {
                 document.getElementById("modalMessage").innerText = "Pesan Anda telah berhasil dikirim!";
                 var myModal = new bootstrap.Modal(document.getElementById('myModal'));
                 myModal.show();
+                // Setel nilai input menjadi string kosong
+                usernameInput.value = "";
+                emailInput.value = "";
+                subjekInput.value = "";
+                pesanInput.value = "";
             }, function(error) {
                 console.error("Error saat mengirim email:", error);
                 document.getElementById("modalMessage").innerText = "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi nanti.";
@@ -58,8 +67,12 @@ function SendMail() {
                 myModal.show();
             });
     } else {
-        // Jika ada input yang tidak diisi, tampilkan pesan kesalahan
-        document.getElementById("modalMessage").innerText = "Semua kolom harus diisi.";
+        // Jika ada input yang tidak diisi atau email tidak valid, tampilkan pesan kesalahan
+        if (!isValidEmail(email)) {
+            document.getElementById("modalMessage").innerText = "Alamat email tidak valid. Silakan coba lagi.";
+        } else {
+            document.getElementById("modalMessage").innerText = "Semua kolom harus diisi.";
+        }
         var myModal = new bootstrap.Modal(document.getElementById('myModal'));
         myModal.show();
     }

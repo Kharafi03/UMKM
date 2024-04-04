@@ -68,7 +68,10 @@ function SendMail() {
             });
     } else {
         // Jika ada input yang tidak diisi atau email tidak valid, tampilkan pesan kesalahan pada modalMessage
-        if (!isValidEmail(email)) {
+        if(!username || !email || !subjek || !pesan) {
+            document.getElementById("modalMessage").innerText = "Semua kolom harus diisi.";
+        }
+        else if (!isValidEmail(email)) {
             document.getElementById("modalMessage").innerText = "Alamat email tidak valid. Silakan coba lagi.";
         } else {
             document.getElementById("modalMessage").innerText = "Semua kolom harus diisi.";

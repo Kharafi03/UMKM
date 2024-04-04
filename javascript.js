@@ -61,10 +61,10 @@ function SendMail() {
                 //tampilkan modal plugin
                 myModal.show();
                 // Setel nilai input menjadi string kosong
-                usernameInput.value = "";
-                emailInput.value = "";
-                subjekInput.value = "";
-                pesanInput.value = "";
+                document.getElementById("username").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("subjek").value = "";
+                document.getElementById("pesan").value = "";
             });
     } else {
         // Jika ada input yang tidak diisi atau email tidak valid, tampilkan pesan kesalahan pada modalMessage
